@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate" autocomplete="off">
+<head>
+<meta charset="utf-8">
+<meta name="google" content="notranslate">
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#121315">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Hubitat Home">
+<title>Hubitat Home</title>
+<link id="manifest" rel="manifest" href="/api/manifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/icons/icon-32.png">
+<link rel="stylesheet" href="/app.css?v=__V__">
+</head>
+<body autocomplete="off" data-lpignore="true" data-1p-ignore data-bwignore data-form-type="other">
+<div id="ptr"><span class="hubdot"></span><span id="ptrText">Pull to refresh</span></div>
+<main id="app">
+  <header class="top">
+    <div class="title">
+      <svg class="homeico" viewBox="0 0 24 24"><path d="M3 11 12 3l9 8M5.5 9v11h13V9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h1 id="viewTitle">Home</h1>
+      <span class="hubdot" id="hubDot" title="Hub connection"></span>
+    </div>
+    <div class="topbtns"><button class="iconbtn editbtn" id="editBtn" aria-label="Done editing"><span class="donetxt">Done</span></button>
+    <a class="iconbtn camsbtn hidden" id="camsBtn" href="https://play.google.com/store/apps/details?id=com.ubnt.unifi.protect" aria-label="Open UniFi Protect" title="UniFi Protect" role="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5A2.5 2.5 0 0 1 6 6h7.5A2.5 2.5 0 0 1 16 8.5v7a2.5 2.5 0 0 1-2.5 2.5H6A2.5 2.5 0 0 1 3.5 15.5v-7Z"/><path d="m16 10.5 4.2-2.4a1 1 0 0 1 1.5.9v6a1 1 0 0 1-1.5.9L16 13.5"/><circle cx="9.5" cy="12" r="2.2"/></svg></a>
+    <button class="iconbtn" id="settingsBtn" aria-label="Settings">
+      <svg viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button></div>
+  </header>
+  <div class="subrow">
+    <p class="sub" id="summary">Connecting to your hub…</p>
+    <button class="energy evonly hidden" id="energyBtn" aria-label="Energy">
+      <span class="eventry"><svg viewBox="0 0 24 24"><path d="M13.5 2.5 5 13.5h6l-1.5 8 8.5-11h-6l1.5-8Z" fill="currentColor"/></svg><span class="evlbl">Energy</span></span>
+    </button>
+  </div>
+
+  <button class="away hidden" id="awayBtn" aria-pressed="false">
+    <span class="awayico"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <span class="awaytext"><b id="awayName">Away Mode</b><small id="awaySub">Off</small></span>
+    <span class="toggle"><span></span></span>
+  </button>
+
+  <nav class="chips" id="chips"></nav>
+  <section class="grid" id="grid"></section>
+  <div class="spacer"></div>
+</main>
+
+<button id="allOff" class="alloff">
+  <svg viewBox="0 0 24 24"><path d="M12 3v8M6.3 6.3a8 8 0 1 0 11.4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  <span id="allOffText">All Off</span>
+</button>
+
+<button id="micBtn" class="micfab hidden" aria-label="Voice control">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg>
+</button>
+
+<div id="voiceBg" class="sheetbg hidden"></div>
+<section id="voice" class="vsheet hidden" data-state="listening" aria-live="polite">
+  <button class="iconbtn sm vclose" id="vClose" aria-label="Close">✕</button>
+  <div class="vorb">
+    <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+    <span class="core">
+      <svg class="vmic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg>
+      <svg class="vcheck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+      <svg class="vx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 7v6M12 16.5v.5"/></svg>
+    </span>
+  </div>
+  <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <p id="vTranscript" class="vtx hint">Listening…</p>
+  <p id="vMsg" class="vmsg"></p>
+  <div id="vChips" class="vchips"></div>
+  <p class="vtips">Try “turn off the office”, “kitchen lights on”, “office fan to high”, “away mode on”</p>
+</section>
+
+<div id="lock" class="lock hidden">
+  <img src="/icons/icon-192.png" alt="" draggable="false">
+  <h2>Hubitat Home</h2>
+  <p>Open this app from your private link to unlock it on this device.</p>
+  <p class="muted small">Lost your link? Someone already signed in can add you under Settings → House setup → People.</p>
+</div>
+
+<div id="sheetBg" class="sheetbg hidden"></div>
+<section id="settings" class="sheet hidden" aria-label="Settings">
+  <div class="grab"></div>
+  <h2>Settings</h2>
+  <div class="card">
+    <h3>Phone alerts</h3>
+    <p class="muted" id="alertDesc">Your alert rules from House setup.</p>
+    <p id="alertStatus" class="status">Checking…</p>
+    <div class="row">
+      <button class="btn primary" id="enableAlerts">Enable alerts</button>
+      <button class="btn" id="testAlert">Send test alert</button>
+    </div>
+    <p id="iosHint" class="muted hidden">On iPhone: tap Share, then <b>Add to Home Screen</b>, open Hubitat Home from your home screen, and enable alerts there.</p>
+  </div>
+  <div class="card">
+    <h3>Hub</h3>
+    <p class="muted" id="hubStatus">–</p>
+    <p class="muted" id="cronStatus">–</p>
+    <div class="row"><a class="btn" id="houseSetup" href="/setup">House setup</a></div>
+    <p class="muted small">Devices, rooms, thermostat, location, features, alert rules and people (who can use this app).</p>
+  </div>
+  <div class="card" id="energyCost">
+    <h3>Energy cost</h3>
+    <p class="muted">Optional estimated cost in the Energy view. Leave blank to hide it.</p>
+    <label class="flab" for="kwhRate">Dollars per kWh</label>
+    <input id="kwhRate" type="number" inputmode="decimal" min="0" step="0.01" placeholder="e.g. 0.14" autocomplete="off" data-lpignore="true" data-1p-ignore data-bwignore data-form-type="other">
+  </div>
+  <div class="card" id="about">
+    <h3>About</h3>
+    <div class="aboutrow"><img src="/icons/icon-192.png" alt="" draggable="false"><div><b>Hubitat Home</b><p class="muted" id="aboutVer">Version –</p><p class="muted" id="aboutBuilt">Built –</p></div></div>
+    <p class="muted feat">Favorites and custom layouts (press and hold a tile to move, resize or hide it), thermostat control with one-time “Set for tonight” plans, Energy view (live watts, plus today / this week / this month kWh from devices that report energy), live power on tiles, outdoor weather, phone alerts from your own rules, voice control, and an update pop-up. Free and open source (MIT).</p>
+    <a class="donate" id="donateLink" href="https://paypal.me/beowulf2014" target="_blank" rel="noopener">Support Hubitat Home (PayPal donation)</a>
+    <a class="feedback" id="feedbackLink" href="mailto:hubitat@fataldev.com?subject=Hubitat%20Home%20feedback">Send ideas or report a bug</a>
+    <div class="row"><button class="btn" id="resetAll">Reset all layouts</button></div>
+    <p id="updStatus" class="status"></p>
+    <div class="row">
+      <button class="btn" id="checkUpd">Check for Update</button>
+      <button class="btn primary hidden" id="updNow">Update now</button>
+    </div>
+  </div>
+  <button class="btn wide" id="closeSettings">Done</button>
+</section>
+
+<section id="thermoSheet" class="sheet hidden" aria-label="Thermostat settings">
+  <div class="grab"></div>
+  <h2>Thermostat</h2>
+  <div class="tlabel">Mode</div>
+  <div class="tseg" id="tmMode" data-seg="mode"></div>
+  <div class="tlabel">Fan</div>
+  <div class="tseg" id="tmFan" data-seg="fan"></div>
+  <button class="btn wide" id="tmClose">Done</button>
+</section>
+
+<section id="planSheet" class="sheet hidden" aria-label="Temporary plan">
+  <div class="grab"></div>
+  <h2>Set for tonight</h2>
+  <p class="muted">A one-time plan, not a recurring schedule. Times are house time (the time zone you chose in setup). Each step can be Cool or Heat — the thermostat will switch if needed.</p>
+  <div class="tlabel">Tonight</div>
+  <div class="tseg tpmodes" id="tpMode1" role="group" aria-label="Tonight mode">
+    <button class="sg on" type="button" data-tp-mode="cool" data-n="1">Cool</button>
+    <button class="sg" type="button" data-tp-mode="heat" data-n="1">Heat</button>
+  </div>
+  <div class="tpstep">
+    <div class="tsp tpdeg">
+      <button class="tbtn" type="button" id="tpT1dn" aria-label="Tonight temperature down">−</button>
+      <b class="tsv" id="tpTemp1Show">72°</b>
+      <button class="tbtn" type="button" id="tpT1up" aria-label="Tonight temperature up">+</button>
+    </div>
+    <div class="tpwhen">
+      <input id="tpTime1" type="time" autocomplete="off" data-lpignore="true" data-1p-ignore data-bwignore data-form-type="other">
+      <small id="tpDay1" class="muted">tonight</small>
+    </div>
+  </div>
+  <label class="tpcheck" for="tpBackOn"><input id="tpBackOn" type="checkbox" checked autocomplete="off" data-lpignore="true" data-1p-ignore data-bwignore data-form-type="other"> Then back to</label>
+  <div id="tpStep2">
+    <div class="tseg tpmodes" id="tpMode2" role="group" aria-label="Return mode">
+      <button class="sg on" type="button" data-tp-mode="cool" data-n="2">Cool</button>
+      <button class="sg" type="button" data-tp-mode="heat" data-n="2">Heat</button>
+    </div>
+    <div class="tpstep">
+      <div class="tsp tpdeg">
+        <button class="tbtn" type="button" id="tpT2dn" aria-label="Morning temperature down">−</button>
+        <b class="tsv" id="tpTemp2Show">78°</b>
+        <button class="tbtn" type="button" id="tpT2up" aria-label="Morning temperature up">+</button>
+      </div>
+      <div class="tpwhen">
+        <input id="tpTime2" type="time" autocomplete="off" data-lpignore="true" data-1p-ignore data-bwignore data-form-type="other">
+        <small id="tpDay2" class="muted">tomorrow morning</small>
+      </div>
+    </div>
+  </div>
+  <p class="status" id="tpErr"></p>
+  <button class="btn primary wide" id="tpSave">Set plan</button>
+  <button class="btn wide" id="tpClose">Close</button>
+</section>
+
+<section id="energySheet" class="sheet evsheet hidden" aria-label="Energy">
+  <div class="grab"></div>
+  <h2>Energy</h2>
+  <div class="tlabel">Live now</div>
+  <div class="evhero" id="evLive">
+    <div class="evtotal"><b id="evWatts">–</b><small id="evWattsSub">across reporting devices</small></div>
+    <div class="evrank" id="evLiveList"></div>
+  </div>
+  <div class="tlabel">Usage</div>
+  <div class="tseg evseg" id="evPeriod" role="tablist" aria-label="Usage period">
+    <button class="sg on" type="button" data-period="today">Today</button>
+    <button class="sg" type="button" data-period="week">This week</button>
+    <button class="sg" type="button" data-period="month">This month</button>
+  </div>
+  <div class="evhero">
+    <div class="evtotal"><b id="evKwh">–</b><small id="evCost" class="hidden"></small></div>
+    <p class="muted small" id="evNote"></p>
+    <div class="evrank" id="evPeriodList"></div>
+  </div>
+  <button class="btn wide" id="enClose">Close</button>
+</section>
+
+<section id="devSheet" class="sheet hidden" aria-label="Device">
+  <div class="grab"></div>
+  <div class="devhead"><div class="devico" id="devIco"></div><div><h2 id="devName">–</h2><p class="muted" id="devState">–</p></div></div>
+  <button class="btn big" id="devToggle">Turn Off</button>
+  <button class="btn wide" id="devClose">Close</button>
+</section>
+
+
+<div id="updBanner" class="updbanner hidden"><span>Update ready <b id="updBannerVer"></b></span><button class="btn primary sm" id="updBannerBtn">Update now</button><button class="iconbtn sm" id="updBannerX" aria-label="Dismiss">✕</button></div>
+<div id="toast" class="toast"></div>
+<script src="/version.js?v=__V__"></script>
+<script src="/app.js?v=__V__"></script>
+<script src="/voice.js?v=__V__"></script>
+</body>
+</html>

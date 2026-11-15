@@ -1,0 +1,28 @@
+{
+  "name": "hubitat-home",
+  "version": "1.0.0",
+  "description": "Installable phone dashboard for your Hubitat hub, running free on your own Cloudflare account.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "deploy": "node scripts/build.mjs && wrangler deploy",
+    "dev": "node scripts/build.mjs && wrangler dev",
+    "test": "node scripts/test-thermo-plan.mjs && node scripts/test-energy.mjs && node scripts/test-config.mjs && node scripts/test-voice.mjs && node scripts/test-push-crypto.mjs"
+  },
+  "devDependencies": {
+    "http_ece": "^1.2.1",
+    "wrangler": "^4.40.0"
+  },
+  "cloudflare": {
+    "bindings": {
+      "SETUP_CODE": {
+        "description": "Pick any code (for example four random words) and write it down. The **setup wizard** asks for it the first time you open your dashboard, so nobody else can claim it."
+      },
+      "KV": {
+        "description": "Storage for your house settings, access keys and alert state. The default name is fine."
+      }
+    }
+  }
+}

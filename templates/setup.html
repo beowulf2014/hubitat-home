@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate" autocomplete="off">
+<head>
+<meta charset="utf-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#121315">
+<meta name="referrer" content="no-referrer">
+<title>Hubitat Home · Setup</title>
+<link rel="icon" type="image/png" href="/icons/icon-32.png">
+<link rel="stylesheet" href="/app.css?v=__V__">
+<link rel="stylesheet" href="/setup.css?v=__V__">
+</head>
+<body class="setup" autocomplete="off" data-lpignore="true" data-1p-ignore data-bwignore data-form-type="other">
+<main id="wiz">
+  <header class="wtop">
+    <img src="/icons/icon-192.png" alt="" class="wlogo">
+    <div><h1 id="wTitle">Set up Hubitat Home</h1><p class="muted" id="wSub">A few steps and your dashboard is ready.</p></div>
+  </header>
+  <nav class="wsteps" id="wSteps" aria-label="Setup steps"></nav>
+
+  <!-- 0. setup code -->
+  <section class="card wstep" data-step="code" data-title="Setup code">
+    <h3>Setup code</h3>
+    <p class="muted">Enter the <b>SETUP_CODE</b> you chose when you deployed. It stops anyone else from setting up your dashboard before you do.</p>
+    <label class="flab" for="setupCodeIn">Setup code</label>
+    <input id="setupCodeIn" class="masked" type="text" spellcheck="false" autocapitalize="off">
+  </section>
+
+  <!-- 1. hub -->
+  <section class="card wstep" data-step="hub" data-title="Hub">
+    <h3>Connect your hub</h3>
+    <ol class="how">
+      <li>Open your hub’s web page. In the left sidebar choose <b>Apps</b>, then <b>Add Built-In App</b> (newer hubs: <b>Add App</b>) → <b>Maker API</b>.</li>
+      <li>Under <b>Select Devices</b>, tick the devices this app may use, then select <b>Update</b>. If you see an option for cloud / remote access, turn it on.</li>
+      <li>Scroll to the example links. Under <b>Cloud</b> endpoints, copy the <b>Get All Devices</b> link (it starts with https://cloud.hubitat.com and ends with access_token=…) and paste it below. Then select <b>Done</b> on the hub.</li>
+    </ol>
+    <p class="muted small">Cloudflare runs in the cloud, so it needs the <b>Cloud</b> link, not the local (192.168…) one. Full guide with pictures: see the README on GitHub.</p>
+    <p class="status ok hidden" id="hubSaved"></p>
+    <label class="flab" for="makerLink">Maker API link</label>
+    <input id="makerLink" type="text" inputmode="url" spellcheck="false" autocapitalize="off" placeholder="https://cloud.hubitat.com/api/…/apps/…/devices/all?access_token=…">
+    <label class="flab" for="makerAccess">Access token <span class="opt">(only if your link doesn’t include it)</span></label>
+    <input id="makerAccess" class="masked" type="text" spellcheck="false" autocapitalize="off">
+    <p class="muted small">The token is stored only in your own Cloudflare account and is never sent back to any phone or browser.</p>
+    <div class="row"><button class="btn primary" id="testHub" type="button">Test connection</button></div>
+    <p class="status" id="hubResult" role="status"></p>
+  </section>
+
+  <!-- 2. devices -->
+  <section class="card wstep" data-step="devices" data-title="Devices">
+    <h3>Pick your devices</h3>
+    <p class="muted">Tick what should appear in the app. You can rename tiles and group them into rooms (each room becomes a tab).</p>
+    <div class="row wtools">
+      <input id="devFilter" type="search" placeholder="Filter devices" aria-label="Filter devices">
+      <button class="btn sm" id="selAll" type="button">All</button><button class="btn sm" id="selNone" type="button">None</button>
+    </div>
+    <div id="devList" class="devlist"></div>
+    <datalist id="roomNames"></datalist>
+    <div class="wsub">
+      <label class="flab" for="thermoPick">Thermostat <span class="opt">(optional)</span></label>
+      <select id="thermoPick"></select>
+      <label class="flab" for="awayPick">Away switch <span class="opt">(optional, e.g. a virtual “Away” switch)</span></label>
+      <select id="awayPick"></select>
+      <label class="flab" for="awayLabel">Away button label</label>
+      <input id="awayLabel" type="text" maxlength="40" placeholder="Away Mode">
+    </div>
+  </section>
+
+  <!-- 3. location -->
+  <section class="card wstep" data-step="place" data-title="Location">
+    <h3>Location and time</h3>
+    <p class="muted">Used for the outdoor temperature (Open-Meteo, free), day/night on the thermostat, and the time zone for plans and alerts. Rounded to about 1 km.</p>
+    <label class="flab" for="houseLabel">Dashboard name</label>
+    <input id="houseLabel" type="text" maxlength="40" placeholder="Home">
+    <label class="flab" for="placeQ">Zip / postal code or town</label>
+    <div class="row wtools">
+      <input id="placeQ" type="search" placeholder="e.g. 10001 or Springfield" aria-label="Zip or town">
+      <select id="placeCountry" aria-label="Country"></select>
+    </div>
+    <div class="row"><button class="btn" id="findPlace" type="button">Find</button><button class="btn" id="geoBtn" type="button">Use my location</button></div>
+    <p class="status" id="placeResult" role="status"></p>
+    <label class="flab" for="tzPick">House time zone</label>
+    <select id="tzPick"></select>
+    <label class="flab" for="unitPick">Temperature</label>
+    <select id="unitPick"><option value="F">°F</option><option value="C">°C (weather only; thermostat controls assume °F)</option></select>
+  </section>
+
+  <!-- 4. features -->
+  <section class="card wstep" data-step="features" data-title="Features">
+    <h3>Features</h3>
+    <p class="muted">Turn on what you want. Everything here can be changed later in Settings → House setup.</p>
+    <div class="feats" id="featList"></div>
+  </section>
+
+  <!-- 5. alerts -->
+  <section class="card wstep" data-step="alerts" data-title="Alerts">
+    <h3>Alert rules</h3>
+    <p class="muted">Get a phone alert when something is left on. Checked every 5 minutes on Cloudflare; each rule alerts once per on-period (or once per night).</p>
+    <div id="ruleList" class="rules"></div>
+    <div class="ruleadd">
+      <label class="flab" for="ruleDev">Device</label><select id="ruleDev"></select>
+      <label class="flab" for="ruleType">When</label>
+      <select id="ruleType"><option value="leftOn">On for longer than…</option><option value="onBetween">On between hours…</option></select>
+      <div id="ruleMinsBox"><label class="flab" for="ruleMins">Minutes</label><input id="ruleMins" type="number" inputmode="numeric" min="5" max="1440" value="30"></div>
+      <div id="ruleHoursBox" class="row hidden">
+        <div><label class="flab" for="ruleFrom">From</label><select id="ruleFrom"></select></div>
+        <div><label class="flab" for="ruleTo">To</label><select id="ruleTo"></select></div>
+      </div>
+      <div class="row"><button class="btn" id="ruleAddBtn" type="button">Add rule</button></div>
+    </div>
+  </section>
+
+  <!-- 6. finish -->
+  <section class="card wstep" data-step="finish" data-title="Finish">
+    <h3 id="finTitle">Finish</h3>
+    <div id="finFirst">
+      <p class="muted">Your private link unlocks the app. Anyone with it can control your devices, so keep it to yourself and your household.</p>
+      <label class="flab" for="yourLabel">Your name <span class="opt">(shown in Settings → People)</span></label>
+      <input id="yourLabel" type="text" maxlength="30" placeholder="Me">
+    </div>
+    <div class="row"><button class="btn primary big" id="saveBtn" type="button">Save and finish</button></div>
+    <p class="status" id="saveResult" role="status"></p>
+    <div id="linkBox" class="linkbox hidden">
+      <p><b>Your private link</b> (shown once; bookmark it or add the app to your home screen from it):</p>
+      <code id="linkOut"></code>
+      <div class="row"><button class="btn" id="copyLink" type="button">Copy link</button><a class="btn primary" id="openLink" href="/">Open my dashboard</a></div>
+    </div>
+  </section>
+
+  <!-- people (edit mode) -->
+  <section class="card wstep" data-step="people" data-title="People">
+    <h3>People</h3>
+    <p class="muted">Each person gets their own private link, favorites and layout. Remove someone to turn their link off.</p>
+    <div id="peopleList" class="rules"></div>
+    <label class="flab" for="personLabel">Add a person</label>
+    <div class="row wtools"><input id="personLabel" type="text" maxlength="30" placeholder="Name"><button class="btn" id="addPerson" type="button">Add</button></div>
+    <div id="personLink" class="linkbox hidden"><p>Send this link to them privately (shown once):</p><code id="personLinkOut"></code><div class="row"><button class="btn" id="copyPerson" type="button">Copy link</button></div></div>
+  </section>
+
+  <div class="wnav">
+    <button class="btn" id="backBtn" type="button">Back</button>
+    <button class="btn primary" id="nextBtn" type="button">Next</button>
+  </div>
+  <p class="muted small wfoot"><a href="/" id="toApp" class="hidden">← Back to the app ·</a> Hubitat Home is free and open source. <a href="https://paypal.me/beowulf2014" target="_blank" rel="noopener">Donate</a> · <a href="mailto:hubitat@fataldev.com?subject=Hubitat%20Home%20setup">Send ideas or report a bug</a></p>
+</main>
+<div id="toast" class="toast"></div>
+<script src="/version.js?v=__V__"></script>
+<script src="/setup.js?v=__V__"></script>
+</body>
+</html>

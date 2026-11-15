@@ -1,0 +1,24 @@
+# Hubitat Home: phone dashboard for a Hubitat hub, on your own Cloudflare account.
+# No settings go in this file: after the first deploy, open your Worker's URL and the setup wizard does the rest.
+name = "hubitat-home"
+main = "src/worker.js"
+compatibility_date = "2025-09-01"
+workers_dev = true
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+# One cron, every 5 minutes: thermostat refresh (every 15 min, only if you pick a thermostat),
+# one-time thermostat plans, and your alert rules. It does nothing until setup is finished.
+[triggers]
+crons = ["*/5 * * * *"]
+
+# House settings, access keys and push subscriptions. The Deploy button (and `wrangler deploy`)
+# creates this namespace for you; you don't need to fill in an id.
+[[kv_namespaces]]
+binding = "KV"
+
+[observability]
+enabled = false
