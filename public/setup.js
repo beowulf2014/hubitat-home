@@ -4,6 +4,8 @@
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 function toast(msg, ms = 2600) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), ms); }
+const copyDonate = $('#copyDonate');
+if (copyDonate) copyDonate.addEventListener('click', async () => { const a = $('#donateAddr').textContent.trim(); try { await navigator.clipboard.writeText(a); toast('Copied ' + a); } catch { toast('Couldn’t copy. Press and hold the address to copy it.'); } });
 
 // ---------- password-manager ignore (same rule as the app): every field here is not a login ----------
 const PM = { autocomplete: 'off', 'data-lpignore': 'true', 'data-1p-ignore': '', 'data-bwignore': '', 'data-form-type': 'other' };

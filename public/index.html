@@ -14,7 +14,7 @@
 <link id="manifest" rel="manifest" href="/api/manifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/icons/icon-32.png">
-<link rel="stylesheet" href="/app.css?v=1.0.0">
+<link rel="stylesheet" href="/app.css?v=1.0.1">
 </head>
 <body autocomplete="off" data-lpignore="true" data-1p-ignore data-bwignore data-form-type="other">
 <div id="ptr"><span class="hubdot"></span><span id="ptrText">Pull to refresh</span></div>
@@ -114,7 +114,10 @@
     <h3>About</h3>
     <div class="aboutrow"><img src="/icons/icon-192.png" alt="" draggable="false"><div><b>Hubitat Home</b><p class="muted" id="aboutVer">Version –</p><p class="muted" id="aboutBuilt">Built –</p></div></div>
     <p class="muted feat">Favorites and custom layouts (press and hold a tile to move, resize or hide it), thermostat control with one-time “Set for tonight” plans, Energy view (live watts, plus today / this week / this month kWh from devices that report energy), live power on tiles, outdoor weather, phone alerts from your own rules, voice control, and an update pop-up. Free and open source (MIT).</p>
-    <a class="donate" id="donateLink" href="https://paypal.me/beowulf2014" target="_blank" rel="noopener">Support Hubitat Home (PayPal donation)</a>
+    <div class="donatebox" id="donate">
+      <p class="donatetxt">Donate with PayPal: send to <b id="donateAddr">donate@fataldev.com</b></p>
+      <div class="row"><button class="btn" id="copyDonate" type="button">Copy address</button><a class="btn primary" id="donateLink" href="https://www.paypal.com/myaccount/transfer/homepage" target="_blank" rel="noopener">Open PayPal</a></div>
+    </div>
     <a class="feedback" id="feedbackLink" href="mailto:hubitat@fataldev.com?subject=Hubitat%20Home%20feedback">Send ideas or report a bug</a>
     <div class="row"><button class="btn" id="resetAll">Reset all layouts</button></div>
     <p id="updStatus" class="status"></p>
@@ -211,8 +214,8 @@
 
 <div id="updBanner" class="updbanner hidden"><span>Update ready <b id="updBannerVer"></b></span><button class="btn primary sm" id="updBannerBtn">Update now</button><button class="iconbtn sm" id="updBannerX" aria-label="Dismiss">✕</button></div>
 <div id="toast" class="toast"></div>
-<script src="/version.js?v=1.0.0"></script>
-<script src="/app.js?v=1.0.0"></script>
-<script src="/voice.js?v=1.0.0"></script>
+<script src="/version.js?v=1.0.1"></script>
+<script src="/app.js?v=1.0.1"></script>
+<script src="/voice.js?v=1.0.1"></script>
 </body>
 </html>

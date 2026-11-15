@@ -1013,6 +1013,8 @@ const newer = (a, b) => { const x = a.split('.').map(Number), y = b.split('.').m
 let swRegistration = null, updating = false, remoteVer = null;
 $('#aboutVer').textContent = 'Version ' + LOCAL.version;
 $('#aboutBuilt').textContent = LOCAL.built ? 'Built ' + new Date(LOCAL.built).toLocaleString([], { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }) : '';
+const copyDonate = $('#copyDonate');
+if (copyDonate) copyDonate.addEventListener('click', async () => { const a = $('#donateAddr').textContent.trim(); try { await navigator.clipboard.writeText(a); toast('Copied ' + a); } catch { toast('Couldn’t copy. Press and hold the address to copy it.'); } });
 const fb = $('#feedbackLink');
 if (fb) fb.href = 'mailto:hubitat@fataldev.com?subject=' + encodeURIComponent('Hubitat Home feedback (v' + LOCAL.version + ')');
 async function fetchRemoteVersion() { const r = await fetch('/api/version', { cache: 'no-store' }); return (await r.json()).version; }

@@ -148,7 +148,7 @@ npm test
 ## Feedback and support
 
 - **Send ideas or report a bug:** [hubitat@fataldev.com](mailto:hubitat@fataldev.com) (also in the app under Settings → About).
-- Hubitat Home is free. If it’s useful to you, you can **[support it with a donation](https://paypal.me/beowulf2014)**.
+- Hubitat Home is free. If it’s useful to you, you can donate. **Donate with PayPal: send to donate@fataldev.com** ([open PayPal’s Send page](https://www.paypal.com/myaccount/transfer/homepage)).
 
 ## License
 

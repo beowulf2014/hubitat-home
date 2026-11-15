@@ -425,4 +425,4 @@ a.btn{text-decoration:none;box-sizing:border-box}
 
 body.no-voice #micBtn{display:none!important}
 body.no-plan .tplanbox{display:none!important}
-.donate{display:inline-block;margin:6px 0 4px;color:var(--teal);font-weight:600}
+.donatebox{margin:8px 0 4px}.donatetxt{margin:0 0 8px;font-weight:600}.donatetxt b{color:var(--teal);user-select:all;-webkit-user-select:all}.donatebox .row a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}

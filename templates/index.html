@@ -114,7 +114,10 @@
     <h3>About</h3>
     <div class="aboutrow"><img src="/icons/icon-192.png" alt="" draggable="false"><div><b>Hubitat Home</b><p class="muted" id="aboutVer">Version –</p><p class="muted" id="aboutBuilt">Built –</p></div></div>
     <p class="muted feat">Favorites and custom layouts (press and hold a tile to move, resize or hide it), thermostat control with one-time “Set for tonight” plans, Energy view (live watts, plus today / this week / this month kWh from devices that report energy), live power on tiles, outdoor weather, phone alerts from your own rules, voice control, and an update pop-up. Free and open source (MIT).</p>
-    <a class="donate" id="donateLink" href="https://paypal.me/beowulf2014" target="_blank" rel="noopener">Support Hubitat Home (PayPal donation)</a>
+    <div class="donatebox" id="donate">
+      <p class="donatetxt">Donate with PayPal: send to <b id="donateAddr">donate@fataldev.com</b></p>
+      <div class="row"><button class="btn" id="copyDonate" type="button">Copy address</button><a class="btn primary" id="donateLink" href="https://www.paypal.com/myaccount/transfer/homepage" target="_blank" rel="noopener">Open PayPal</a></div>
+    </div>
     <a class="feedback" id="feedbackLink" href="mailto:hubitat@fataldev.com?subject=Hubitat%20Home%20feedback">Send ideas or report a bug</a>
     <div class="row"><button class="btn" id="resetAll">Reset all layouts</button></div>
     <p id="updStatus" class="status"></p>

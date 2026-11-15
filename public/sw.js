@@ -1,7 +1,7 @@
-importScripts('/version.js?v=1.0.0');
-const VERSION = '1.0.0';
+importScripts('/version.js?v=1.0.1');
+const VERSION = '1.0.1';
 const CACHE = 'hh-' + VERSION;
-const SHELL = ['/', '/app.css?v=1.0.0', '/app.js?v=1.0.0', '/voice.js?v=1.0.0', '/version.js?v=1.0.0', '/icons/icon-192.png', '/apple-touch-icon.png'];
+const SHELL = ['/', '/app.css?v=1.0.1', '/app.js?v=1.0.1', '/voice.js?v=1.0.1', '/version.js?v=1.0.1', '/icons/icon-192.png', '/apple-touch-icon.png'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('message', (e) => {

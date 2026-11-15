@@ -44,3 +44,5 @@ body.setup{-webkit-user-select:auto;user-select:auto}
 a.btn{text-decoration:none;color:inherit;display:inline-block}
 a.btn.primary{color:#fff}
 .lockmsg{padding:40px 20px;text-align:center}
+.linkbtn{background:none;border:0;padding:0 2px;color:var(--teal);font:inherit;text-decoration:underline;cursor:pointer}
+.wfoot b{user-select:all;-webkit-user-select:all}

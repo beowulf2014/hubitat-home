@@ -1,6 +1,6 @@
 {
   "name": "hubitat-home",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Installable phone dashboard for your Hubitat hub, running free on your own Cloudflare account.",
   "type": "module",
   "private": true,
