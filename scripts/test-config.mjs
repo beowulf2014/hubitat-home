@@ -29,4 +29,6 @@ assert.equal(c.tz, 'America/New_York');
 assert.equal(sanitizeConfig({ tz: 'Mars/Base' }, inf).tz, 'UTC');
 assert.equal(sanitizeConfig({ ...DEMO_CONFIG, thermostatId: null }, inf).features.thermoPlan, false);
 assert.ok(!/[<>]/.test(JSON.stringify(sanitizeConfig({ ...DEMO_CONFIG, house: '<script>' }, inf))));
+const noLoc = sanitizeConfig({ ...DEMO_CONFIG, lat: null, lon: null }, inf);
+assert.equal(noLoc.lat, null, 'no location stays empty (not 0,0)');
 console.log('test-config: ok');

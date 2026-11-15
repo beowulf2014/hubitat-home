@@ -121,7 +121,7 @@ export function sanitizeConfig(input, hubDevices) {
   };
   const rules = (Array.isArray(c.rules) ? c.rules : []).map((r) => cleanRule(r, ids)).filter(Boolean).slice(0, MAX_RULES);
   const lat = Number(c.lat), lon = Number(c.lon);
-  const hasLoc = Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180;
+  const hasLoc = c.lat != null && c.lon != null && c.lat !== '' && c.lon !== '' && Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180;
   return {
     v: 1,
     house: str(c.house, 40) || 'Home',
